@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+
+<!--==========================================================
+TP - Progra III "SUPERCARS OLIVOS"
+Alumno: Joaquin Vargas 
+============================================================-->
+
+<html lang="es"> <!-- idioma -->
+
+<head>
+    <meta charset="UTF-8"> <!-- Caracteres para tildes, ñ, etc -->
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Ajusta el ancho de la pagina al de cada pantalla -->
+
+    <meta name="description" content="Supercars Olivos: una selección confiables de deportivos y superdeportivos."> <!-- Descripcion que muestran los buscadores -->
+
+    <title>Supercars Olivos</title> <!-- Titulo de la pestaña -->
+
+    <link rel="icon" type="image/png" href="assets/icono.png"> <!--RUTA del Icono de la pestaña-->
+
+    <!-- Fuentes sacadas de Google Fonts: Manrope (titulos) y DM Sans (textos) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="index.css"> <!--RUTA css (Estilos)-->
+
+    <script defer src="index.js"></script> <!--RUTA js (JavaScrips)-->
+</head>
+
+<body>
+    <!-- ECABEZADO -->
+    <header class="header">
+        <div class="contenedor header__inner">
+
+            <!-- Logo y nombre: al hacer click si estas abajo vuelve al inicio -->
+            <a class="marca" href="#inicio" aria-label="Supercars Olivos, ir al inicio">
+                
+                <img class="marca__logo" src="assets/icono.png" alt="Logo de Supercars Olivos"> <!--RUTA icono-->
+                <span class="marca__texto">
+                    <span class="marca__linea">Supercars</span>
+                    <span class="marca__linea">Olivos</span>
+                </span>
+            </a>
+
+            <!-- Navegacion principal. En celulares se oculta y se abre con un menu desplegable. veo redundante los botones del header pero me gusta como presume lo responsive -->
+            <nav class="nav" id="menu" aria-label="Navegación principal">
+                <ul class="nav__lista">
+                    <li><a class="nav__enlace" href="#inicio" aria-current="page">Inicio</a></li>
+                    <li><a class="nav__enlace" href="#superdeportivos">Superdeportivos</a></li>
+                    <li><a class="nav__enlace" href="#deportivos">Deportivos</a></li>
+                    <li><a class="nav__enlace" href="#nosotros">Quiénes somos</a></li> <!-- Lleva a la ultima seccion del main -->
+                </ul>
+            </nav>
+
+            <a class="btn btn--primario btn--chico header__cta" href="#contacto">Contacto</a> <!-- Boton de contacto: lleva al pie de pagina -->
+
+            <!-- Boton hamburguesa (solo visible en medidas chicas) -->
+            <button class="nav-toggle" id="botonMenu" type="button"
+                    aria-label="Abrir menú" aria-expanded="false" aria-controls="menu">
+                <span class="nav-toggle__linea"></span>
+                <span class="nav-toggle__linea"></span>
+                <span class="nav-toggle__linea"></span>
+            </button>
+
+        </div>
+    </header>
+
+
+    <main>
+        <!-- PORTADA -->
+        <section class="hero" id="inicio">
+
+            <img class="hero__img" src="assets/hero.jpg" alt=""> <!-- RUTA foto portada (Pensando si la cambio)-->
+
+            <div class="contenedor hero__contenido">
+                <h1 class="hero__titulo">Supercars Olivos</h1>
+                <p class="hero__subtitulo">Los mejores deportivos y superdeportivos en un solo lugar.</p>
+
+                <!-- Botones principales: llevan a cada catalogo (CANCELADO por repetitivo)-->
+                <!-- <div class="hero__acciones">
+                    <a class="btn btn--primario" href="#superdeportivos">Ver superdeportivos <span aria-hidden="true">↗</span></a>
+                    <a class="btn btn--contorno" href="#deportivos">Ver deportivos</a>
+                </div> -->
+            </div>
+        </section>
+
+        <!-- TARJETAS AL CATALOGO -->
+        <section class="seccion seccion--compacta" id="catalogo" aria-label="Accesos al catálogo">
+            <div class="contenedor accesos">
+
+                <!-- Superdeportivos -->
+                <a class="acceso" href="#superdeportivos">
+                    <img class="acceso__img" src="assets/Deportivo-rojo.jpg" alt=""> <!-- RUTA portada de los superduper (pensando si la cambio)-->
+                    <h2 class="acceso__titulo">Catálogo superdeportivos</h2>
+                </a>
+
+                <!-- Deportivos -->
+                <a class="acceso" href="#deportivos">
+                    <img class="acceso__img" src="assets/Noble-Rojo.jpg" alt=""> <!-- RUTA portada de los comunachos (lo mismo que arriba) -->
+                    <h2 class="acceso__titulo">Catálogo deportivos</h2>
+                </a>
+
+            </div>
+        </section>
+
+
+        <!-- DESTACADOS / CARRUSEL -->
+        <section class="seccion" id="destacados">
+            <div class="contenedor">
+
+                <!-- BOTONES -->
+                <div class="carrusel__cabecera">
+                    <h2 class="seccion__titulo">Destacados</h2>
+
+                    <div class="carrusel__controles">
+                        <button class="carrusel__boton" id="carruselAnterior" type="button" aria-label="Ver auto anterior">
+                            <svg class="icono" viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+                        </button>
+                        <button class="carrusel__boton" id="carruselSiguiente" type="button" aria-label="Ver auto siguiente">
+                            <svg class="icono" viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- CUERPO DEL CARRUSEL -->
+                <div class="carrusel__pista" id="pistaCarrusel" role="region" aria-label="Autos destacados">
+
+                    <article class="card-auto">
+                        <img class="card-auto__img" src="assets/premiums-y-superdeportivos/porsche-911.png" alt="Porsche 911 de perfil" loading="lazy"> <!-- RUTA porsche-911 -->
+                        <div class="card-auto__pie">
+                            <div>
+                                <h3 class="card-auto__nombre">Porsche 911</h3>
+                                <p class="card-auto__categoria">Superdeportivo</p>
+                            </div>
+                            <a class="btn btn--primario btn--chico" href="#contacto">Consultar</a>
+                        </div>
+                    </article>
+
+                    <article class="card-auto">
+                        <img class="card-auto__img" src="assets/premiums-y-superdeportivos/audi-r8.png" alt="Audi R8 de perfil" loading="lazy"> <!-- RUTA audi-r8 -->
+                        <div class="card-auto__pie">
+                            <div>
+                                <h3 class="card-auto__nombre">Audi R8</h3>
+                                <p class="card-auto__categoria">Superdeportivo</p>
+                            </div>
+                            <a class="btn btn--primario btn--chico" href="#contacto">Consultar</a>
+                        </div>
+                    </article>
+
+                    <article class="card-auto">
+                        <img class="card-auto__img" src="assets/premiums-y-superdeportivos/aston-martin-db11.png" alt="Aston Martin DB11 de perfil" loading="lazy"> <!-- RUTA aston-martin-db11 -->
+                        <div class="card-auto__pie">
+                            <div>
+                                <h3 class="card-auto__nombre">Aston Martin DB11</h3>
+                                <p class="card-auto__categoria">Superdeportivo</p>
+                            </div>
+                            <a class="btn btn--primario btn--chico" href="#contacto">Consultar</a>
+                        </div>
+                    </article>
+
+                    <article class="card-auto">
+                        <img class="card-auto__img" src="assets/nobles-y-deportivos/volkswagen-golf.png" alt="Volkswagen Golf de perfil" loading="lazy"> <!-- RUTA volkswagen-golf -->
+                        <div class="card-auto__pie">
+                            <div>
+                                <h3 class="card-auto__nombre">Volkswagen Golf</h3>
+                                <p class="card-auto__categoria">Deportivo</p>
+                            </div>
+                            <a class="btn btn--primario btn--chico" href="#contacto">Consultar</a>
+                        </div>
+                    </article>
+
+                    <article class="card-auto">
+                        <img class="card-auto__img" src="assets/nobles-y-deportivos/audi-a3.png" alt="Audi A3 de perfil" loading="lazy"> <!-- RUTA: audi-a3-->
+                        <div class="card-auto__pie">
+                            <div>
+                                <h3 class="card-auto__nombre">Audi A3</h3>
+                                <p class="card-auto__categoria">Deportivo</p>
+                            </div>
+                            <a class="btn btn--primario btn--chico" href="#contacto">Consultar</a>
+                        </div>
+                    </article>
+
+                    <article class="card-auto">
+                        <img class="card-auto__img" src="assets/nobles-y-deportivos/toyota-corolla.png" alt="Toyota Corolla de perfil" loading="lazy"> <!-- RUTAtoyota-corolla -->
+                        <div class="card-auto__pie">
+                            <div>
+                                <h3 class="card-auto__nombre">Toyota Corolla</h3>
+                                <p class="card-auto__categoria">Deportivo</p>
+                            </div>
+                            <a class="btn btn--primario btn--chico" href="#contacto">Consultar</a>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- SUPERDEPORTIVOS -->
+        <section class="seccion" id="superdeportivos">
+            <div class="contenedor">
+                <h2 class="seccion__titulo">Superdeportivos</h2>
+                <p class="seccion__descripcion">Los modelos más exclusivos de nuestra flota.</p>
+
+                <div class="grilla-autos">
+
+                    <!-- Aston Martin DB11 -->
+                    <article class="card-auto">
+                        <img class="card-auto__img" src="assets/premiums-y-superdeportivos/aston-martin-db11.png" alt="Aston Martin DB11 de perfil" loading="lazy">
+                        <div class="card-auto__pie">
+                            <div>
+                                <h3 class="card-auto__nombre">Aston Martin DB11</h3>
+                                <p class="card-auto__categoria">Superdeportivo</p>
+                                <p class="card-auto__categoria">El arte del gran turismo británico. Un coupé de proporciones impecables y líneas fluidas que destila elegancia pura. Llevá la sofisticación y el lujo a su máxima expresión en cada viaje.</p>
+                            </div>
+                            <a class="btn btn--primario btn--chico" href="#contacto">Consultar</a>
+                        </div>
+                    </article>
+
+                    <!-- Audi R8 -->
+                    <article class="card-auto">
+                        <img class="card-auto__img" src="assets/premiums-y-superdeportivos/audi-r8.png" alt="Audi R8 de perfil" loading="lazy">
+                        <div class="card-auto__pie">
+                            <div>
+                                <h3 class="card-auto__nombre">Audi R8</h3>
+                                <p class="card-auto__categoria">Superdeportivo</p>
+                                <p class="card-auto__categoria">ADN de competición diseñado para la calle. Su perfil de motor central y las inconfundibles tomas de aire laterales imponen una presencia de deportividad extrema. Sentí el poder de un superdeportivo legendario.</p>
+                            </div>
+                            <a class="btn btn--primario btn--chico" href="#contacto">Consultar</a>
+                        </div>
+                    </article>
+
+                    <!-- Chevrolet Corvette -->
+                    <article class="card-auto">
+                        <img class="card-auto__img" src="assets/premiums-y-superdeportivos/chevrolet-corvette.png" alt="Chevrolet Corvette de perfil" loading="lazy">
+                        <div class="card-auto__pie">
+                            <div>
+                                <h3 class="card-auto__nombre">Chevrolet Corvette</h3>
+                                <p class="card-auto__categoria">Superdeportivo</p>
+                                <p class="card-auto__categoria">Revolución aerodinámica. Con su agresiva silueta esculpida y diseño de motor central, este deportivo desafía todos los límites establecidos. Dominá el asfalto con una postura exótica e imponente.</p>
+                            </div>
+                            <a class="btn btn--primario btn--chico" href="#contacto">Consultar</a>
+                        </div>
+                    </article>
+
+                    <!-- Ford Mustang -->
+                    <article class="card-auto">
+                        <img class="card-auto__img" src="assets/premiums-y-superdeportivos/ford-mustang.png" alt="Ford Mustang de perfil" loading="lazy">
+                        <div class="card-auto__pie">
+                            <div>
+                                <h3 class="card-auto__nombre">Ford Mustang</h3>
+                                <p class="card-auto__categoria">Superdeportivo</p>
+                                <p class="card-auto__categoria">El ícono indiscutido del muscle car. Su clásica caída de techo fastback y su perfil musculoso mantienen viva la leyenda de la potencia americana. Despertá tus instintos y adueñate de la ruta.</p>
+                            </div>
+                            <a class="btn btn--primario btn--chico" href="#contacto">Consultar</a>
+                        </div>
+                    </article>
+
+                    <!-- Mercedes-Benz AMG -->
+                    <article class="card-auto">
+                        <img class="card-auto__img" src="assets/premiums-y-superdeportivos/mercedes-benz-amg.png" alt="Mercedes-Benz AMG de perfil" loading="lazy">
+                        <div class="card-auto__pie">
+                            <div>
+                                <h3 class="card-auto__nombre">Mercedes-Benz AMG</h3>
+                                <p class="card-auto__categoria">Superdeportivo</p>
+                                <p class="card-auto__categoria">Pura adrenalina con traje de lujo. Su capó alargado y la cabina retrasada crean una obra maestra visual de velocidad y agresividad. Convertí tu pasión por el manejo en una experiencia de alta gama.</p>
+                            </div>
+                            <a class="btn btn--primario btn--chico" href="#contacto">Consultar</a>
+                        </div>
+                    </article>
+
+                    <!-- Porsche 911 -->
+                    <article class="card-auto">
+                        <img class="card-auto__img" src="assets/premiums-y-superdeportivos/porsche-911.png" alt="Porsche 911 de perfil" loading="lazy">
+                        <div class="card-auto__pie">
+                            <div>
+                                <h3 class="card-auto__nombre">Porsche 911</h3>
+                                <p class="card-auto__categoria">Superdeportivo</p>
+                                <p class="card-auto__categoria">La silueta que definió la historia de los autos deportivos. Un diseño atemporal que conserva su inconfundible perfil curvo y proporciones perfectas. Invertí en la perfección clásica y el rendimiento puro.</p>
+                            </div>
+                            <a class="btn btn--primario btn--chico" href="#contacto">Consultar</a>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- DEPORTIVOS / NOBLES -->
+        <section class="seccion" id="deportivos">
+            <div class="contenedor">
+                <h2 class="seccion__titulo">Deportivos</h2>
+                <p class="seccion__descripcion">Autos nobles con carácter deportivo para el día a día.</p>
+
+                <div class="grilla-autos">
+
+                    <!-- Audi A3 -->
+                    <article class="card-auto">
+                        <img class="card-auto__img" src="assets/nobles-y-deportivos/audi-a3.png" alt="Audi A3 de perfil" loading="lazy">
+                        <div class="card-auto__pie">
+                            <div>
+                                <h3 class="card-auto__nombre">Audi A3</h3>
+                                <p class="card-auto__categoria">Deportivo</p>
+                                <p class="card-auto__categoria">Deportividad premium en su máxima expresión. Este modelo cautiva con sus líneas vanguardistas y un diseño pensado para quienes no negocian la exclusividad ni el rendimiento. Subite al siguiente nivel.</p>
+                            </div>
+                            <a class="btn btn--primario btn--chico" href="#contacto">Consultar</a>
+                        </div>
+                    </article>
+
+                    <!-- Chevrolet Cruze -->
+                    <article class="card-auto">
+                        <img class="card-auto__img" src="assets/nobles-y-deportivos/chevrolet-cruze.png" alt="Chevrolet Cruze de perfil" loading="lazy">
+                        <div class="card-auto__pie">
+                            <div>
+                                <h3 class="card-auto__nombre">Chevrolet Cruze</h3>
+                                <p class="card-auto__categoria">Deportivo</p>
+                                <p class="card-auto__categoria">Diseño audaz y un perfil irresistible. Un sedán estilizado, creado para quienes buscan destacar en cada viaje con elegancia, espacio y una presencia imponente en el asfalto. ¡Conocelo y enamorate a primera vista!</p>
+                            </div>
+                            <a class="btn btn--primario btn--chico" href="#contacto">Consultar</a>
+                        </div>
+                    </article>
+
+                    <!-- Fiat Cronos (Profe el archivo se llama kronnos, pero creo que no existe ese je) -->
+                    <article class="card-auto">
+                        <img class="card-auto__img" src="assets/nobles-y-deportivos/fiat-kronnos.png" alt="Fiat Cronos de perfil" loading="lazy">
+                        <div class="card-auto__pie">
+                            <div>
+                                <h3 class="card-auto__nombre">Fiat Cronos</h3>
+                                <p class="card-auto__categoria">Deportivo</p>
+                                <p class="card-auto__categoria">Elegancia urbana y eficiencia en cada kilómetro. Este sedán de líneas fluidas combina un diseño seductor con el confort ideal para tu día a día. ¡Descubrí el auto que se adapta a tu ritmo!</p>
+                            </div>
+                            <a class="btn btn--primario btn--chico" href="#contacto">Consultar</a>
+                        </div>
+                    </article>
+
+                    <!-- Nissan Sentra -->
+                    <article class="card-auto">
+                        <img class="card-auto__img" src="assets/nobles-y-deportivos/nissan-sentra.png" alt="Nissan Sentra de perfil" loading="lazy">
+                        <div class="card-auto__pie">
+                            <div>
+                                <h3 class="card-auto__nombre">Nissan Sentra</h3>
+                                <p class="card-auto__categoria">Deportivo</p>
+                                <p class="card-auto__categoria">Atrevido, tecnológico y sofisticado. Con su marcado estilo aerodinámico y perfil moderno, este sedán redefine las reglas del juego en la ciudad. Elevá tu experiencia de conducción hoy mismo.</p>
+                            </div>
+                            <a class="btn btn--primario btn--chico" href="#contacto">Consultar</a>
+                        </div>
+                    </article>
+
+                    <!-- Toyota Corolla -->
+                    <article class="card-auto">
+                        <img class="card-auto__img" src="assets/nobles-y-deportivos/toyota-corolla.png" alt="Toyota Corolla de perfil" loading="lazy">
+                        <div class="card-auto__pie">
+                            <div>
+                                <h3 class="card-auto__nombre">Toyota Corolla</h3>
+                                <p class="card-auto__categoria">Deportivo</p>
+                                <p class="card-auto__categoria">El equilibrio perfecto entre prestigio y máxima confiabilidad. Un sedán elegante de proporciones impecables que te asegura tranquilidad, confort y un excelente valor de reventa. La inversión inteligente para tu garage.</p>
+                            </div>
+                            <a class="btn btn--primario btn--chico" href="#contacto">Consultar</a>
+                        </div>
+                    </article>
+
+                    <!-- Volkswagen Golf -->
+                    <article class="card-auto">
+                        <img class="card-auto__img" src="assets/nobles-y-deportivos/volkswagen-golf.png" alt="Volkswagen Golf de perfil" loading="lazy">
+                        <div class="card-auto__pie">
+                            <div>
+                                <h3 class="card-auto__nombre">Volkswagen Golf</h3>
+                                <p class="card-auto__categoria">Deportivo</p>
+                                <p class="card-auto__categoria">El ícono indiscutido de los hatchbacks. Su inconfundible perfil deportivo, detalles dinámicos y espíritu ágil están listos para adueñarse de la calle. Sentí la emoción de manejar un clásico moderno.</p>
+                            </div>
+                            <a class="btn btn--primario btn--chico" href="#contacto">Consultar</a>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- QUIENES SOMOS -->
+        <section class="seccion" id="nosotros">
+            <div class="contenedor">
+                <h2 class="seccion__titulo seccion__titulo--acento">Quiénes somos</h2>
+
+                <p class="seccion__descripcion">
+                    Supercars Olivos nace de una idea simple: que encontrar un auto deportivo no sea una búsqueda
+                    interminable. Reunimos en un solo lugar una selección curada de vehículos, desde modelos nobles
+                    pensados para el día a día hasta superdeportivos para quienes buscan algo más.
+                </p>
+
+                <p class="seccion__descripcion">
+                    Organizamos la flota en dos líneas. En Deportivos están los autos nobles, con carácter y una
+                    conducción cómoda para todos los días. En Superdeportivos están los modelos premium, pensados
+                    para ofrecer prestaciones y presencia fuera de lo común.
+                </p>
+
+                <p class="seccion__descripcion">
+                    Cada unidad se muestra con claridad y, si alguna te interesa, el botón Consultar te conecta con
+                    nuestro equipo, que responde tus dudas y te acompaña en cada paso. Estamos en Olivos y queremos
+                    que cada consulta sea tan buena como el auto que elegís.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- PIE DE PAGINA -->
+    <footer class="footer" id="contacto">
+        <div class="contenedor footer__grilla">
+
+            <!-- MARCA -->
+            <div class="footer__bloque">
+                <a class="marca" href="#inicio" aria-label="Supercars Olivos, volver al inicio">
+                    <img class="marca__logo" src="assets/icono.png" alt="Logo de Supercars Olivos"> <!-- RUTA icono -->
+                    <span class="marca__texto">
+                        <span class="marca__linea">Supercars</span>
+                        <span class="marca__linea">Olivos</span>
+                    </span>
+                </a>
+                <p class="footer__texto">Autos nobles, deportivos y superdeportivos en Olivos.</p>
+            </div>
+
+            <!-- CONTACTOS -->
+            <div class="footer__bloque">
+                <h2 class="footer__titulo">Contactos</h2>
+                <p class="footer__texto">
+                    <a class="footer__enlace" href="mailto:contacto@supercarsolivos.com">contacto@supercarsolivos.com</a>
+                </p>
+                <p class="footer__texto">Olivos, Buenos Aires</p>
+
+                <!-- REDES SOCIALES -->
+                <ul class="redes">
+                    <li>
+                        <a class="redes__enlace" href="https://www.Instagram.com/supercarsolivos.Callefalsa123" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Supercars Olivos">
+                            <img class="redes__icono" src="assets/Icons/instagram.png" alt=""> <!-- RUTA icono instagram -->
+                        </a>
+                    </li>
+                    <li>
+                        <a class="redes__enlace" href="https://www.facebook.com/supercarsolivos.Callefalsa123" target="_blank" rel="noopener noreferrer" aria-label="Facebook de Supercars Olivos">
+                            <img class="redes__icono" src="assets/Icons/facebook (2).png" alt=""> <!-- RUTA icono facebook -->
+                        </a>
+                    </li>
+                    <li>
+                        <!-- WhatsApp -->
+                        <a class="redes__enlace" href="https://wa.me/5491100000000.Callefalsa123" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp de Supercars Olivos">
+                            <img class="redes__icono" src="assets/Icons/whatsapp(2).png" alt=""> <!-- RUTA icono whatsapp -->
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- ENLACES (ver si los quito por repetitivos) -->
+            <div class="footer__bloque">
+                <h2 class="footer__titulo">Secciones</h2>
+                <ul class="footer__lista">
+                    <li><a class="footer__enlace" href="#inicio">Inicio</a></li>
+                    <li><a class="footer__enlace" href="#superdeportivos">Superdeportivos</a></li>
+                    <li><a class="footer__enlace" href="#deportivos">Deportivos</a></li>
+                    <li><a class="footer__enlace" href="#nosotros">Quiénes somos</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- Linea de derechos el año lo completa index (Enseñado por Gemini) -->
+        <p class="contenedor footer__legal">© <span id="anio">2026</span> Supercars Olivos. Todos los derechos reservados. Prohibido copiones.</p>
+    </footer>
+
+</body>
+
+</html>

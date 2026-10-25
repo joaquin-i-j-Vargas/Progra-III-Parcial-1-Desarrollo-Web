@@ -1,0 +1,691 @@
+
+/* VARIABLES */
+:root {
+    /* Colores */
+    --color-fondo: #14171c;            /* fondo general de la pagina */
+    --color-superficie: #1c2026;       /* tarjetas, menu y footer */
+    --color-superficie-alta: #252a32;  /* degradado de las tarjetas */
+    --color-borde: #2e343d;            /* bordes sutiles */
+    --color-texto: #f2f4f7;            /* texto principal */
+    --color-texto-suave: #a3abb7;      /* texto secundario */
+    --color-acento: #ff6a13;           /* naranja de marca */
+    --color-acento-hover: #ff8540;     /* naranja al pasar el mouse */
+    --color-texto-boton: #ffffff;      /* texto de los botones naranjas */
+
+    /* Tipografias (se importaron en el <head> del HTML) */
+    --fuente-titulos: "Manrope", sans-serif;
+    --fuente-texto: "DM Sans", sans-serif;
+
+    /* Medidas reutilizables */
+    --ancho-contenedor: 72rem;         /* ancho maximo del contenido */
+    --alto-header: 4.5rem;             /* alto de la cabecera */
+    --radio: 0.75rem;                  /* bordes redondeados */
+    --espacio-seccion: 3.5rem;         /* espacio vertical entre secciones */
+}
+
+
+/* BASE / RESET */
+
+/* Todos los elementos calculan su ancho incluyendo padding y borde */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    /* Evita que el header fijo tape el titulo al navegar por anclas */
+    scroll-padding-top: var(--alto-header);
+}
+
+body {
+    font-family: var(--fuente-texto);
+    font-size: 1rem;
+    line-height: 1.6;
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+}
+
+/* Las imagenes nunca se salen de su contenedor */
+img {
+    display: block;
+    max-width: 100%;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+ul {
+    padding: 0;
+    list-style: none;
+}
+
+/* Contorno visible cuando un elemento recibe el foco (teclado) */
+:focus {
+    outline: 3px solid var(--color-acento);
+    outline-offset: 3px;
+}
+
+
+/* UTILIDADES (clases que se reutilizan en toda la pagina */
+
+/* Contenedor centrado con margen lateral y ancho maximo */
+.contenedor {
+    width: 92%;
+    max-width: var(--ancho-contenedor);
+    margin-inline: auto;
+}
+
+/* Boton base */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.85rem 1.5rem;
+    border: 1px solid transparent;
+    border-radius: 0.5rem;
+    font-family: var(--fuente-texto);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+}
+
+/* Variante naranja */
+.btn--primario {
+    background-color: var(--color-acento);
+    color: var(--color-texto-boton);
+}
+
+.btn--primario:hover {
+    background-color: var(--color-acento-hover);
+}
+
+/* Variante chica (header y tarjetas) */
+.btn--chico {
+    padding: 0.55rem 1.1rem;
+    font-size: 0.9rem;
+}
+
+/* Icono SVG de linea */
+.icono {
+    width: 1.25rem;
+    height: 1.25rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Logo + nombre: se uso en el header y en el footer */
+.marca {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.marca__logo {
+    width: 2.75rem;
+    height: 2.75rem;
+}
+
+.marca__texto {
+    font-family: var(--fuente-titulos);
+    font-size: 0.8rem;
+    font-weight: 800;
+    font-style: italic;
+    line-height: 1.15;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+
+
+/* HEADER Y MENU */
+
+/* Cabecera pegada arriba al hacer scroll */
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: rgba(20, 23, 28, 0.94);
+    border-bottom: 1px solid var(--color-borde);
+    backdrop-filter: blur(8px);
+}
+
+.header__inner {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    min-height: var(--alto-header);
+}
+
+/* Empuja boton Contacto se empuja a la derecha con a la hamburguesa */
+.header__cta {
+    margin-left: auto;
+}
+
+/* Menu en celular: oculto por defecto, aparece como panel debajo del header */
+.nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    padding: 0.5rem 1rem 1rem;
+    background-color: var(--color-superficie);
+    border-bottom: 1px solid var(--color-borde);
+}
+
+/* index.js pone data-abierto="true" al tocar la hamburguesa */
+.nav[data-abierto="true"] {
+    display: block;
+}
+
+.nav__lista {
+    display: flex;
+    flex-direction: column;
+}
+
+.nav__enlace {
+    display: block;
+    padding: 0.8rem 0;
+    font-weight: 500;
+    border-bottom: 2px solid transparent;
+}
+
+.nav__enlace:hover {
+    color: var(--color-acento);
+}
+
+/* Link de la seccion actual */
+.nav__enlace[aria-current="page"] {
+    color: var(--color-acento);
+}
+
+/* BATON HAMBURGUESA: tres lineas naranjas */
+.nav-toggle {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 0.6rem 0.4rem;
+    background: none;
+    border: 0;
+    cursor: pointer;
+}
+
+.nav-toggle__linea {
+    width: 1.6rem;
+    height: 3px;
+    border-radius: 2px;
+    background-color: var(--color-acento);
+}
+
+
+/* PORTADA */
+.hero {
+    position: relative;            /* para ubicar la imagen y el degradado adentro */
+    display: flex;
+    align-items: flex-end;         /* el texto queda abajo, como en el diseño */
+    min-height: 75vh;
+    padding-bottom: 3rem;
+    overflow: hidden;
+}
+
+/* Foto de fondo */
+.hero__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 60%;
+}
+
+/* Degradado oscuro a la portada para que se vea mas lindito */
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(20, 23, 28, 0.35) 0%,
+        rgba(20, 23, 28, 0.55) 55%,
+        var(--color-fondo) 100%
+    );
+}
+
+/* El contenido va por encima de la imagen y del degradado */
+.hero__contenido {
+    position: relative;
+    z-index: 1;
+}
+
+.hero__titulo {
+    margin-bottom: 0.75rem;
+    font-family: var(--fuente-titulos);
+    font-size: 2.4rem;
+    font-weight: 800;
+    font-style: italic;
+    line-height: 1;
+    text-transform: uppercase;
+}
+
+.hero__subtitulo {
+    max-width: 36rem;
+    margin-bottom: 1.75rem;
+    font-size: 1.05rem;
+    line-height: 1.4;
+}
+
+
+
+/* SECCIONES (estructura comun, titulos y textos) */
+.seccion {
+    padding-block: var(--espacio-seccion);
+}
+
+/* Variante con menos espacio (accesos al catalogo) */
+.seccion--compacta {
+    padding-block: 0 var(--espacio-seccion);
+}
+
+.seccion__titulo {
+    margin-bottom: 1rem;
+    font-family: var(--fuente-titulos);
+    font-size: 1.6rem;
+    font-weight: 800;
+    font-style: italic;
+    text-transform: uppercase;
+}
+
+/* Variante naranja y mas chica ("Quienes somos") */
+.seccion__titulo--acento {
+    font-size: 1.1rem;
+    color: var(--color-acento);
+}
+
+.seccion__descripcion {
+    max-width: 60ch;               /* limita el largo de linea para leer mejor */
+    margin-bottom: 1.5rem;
+    color: var(--color-texto-suave);
+}
+
+/* TARJETAS CATALOGO */
+.accesos {
+    display: grid;
+    gap: 1rem;                     /* 1 columna en celular */
+}
+
+.acceso {
+    position: relative;
+    display: grid;
+    place-items: center;           /* titulo centrado */
+    min-height: 11rem;
+    overflow: hidden;
+    isolation: isolate;            /* mantiene la imagen detras del titulo */
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio);
+    background: linear-gradient(135deg, var(--color-superficie), var(--color-superficie-alta));
+    transition: border-color 0.2s;
+}
+
+.acceso:hover {
+    border-color: var(--color-acento);
+}
+
+/* Auto de fondo */
+.acceso__img {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    /* padding: 0.75rem; */
+    object-fit: cover;
+    opacity: 0.4;
+    transition: opacity 0.2s;
+}
+
+.acceso:hover .acceso__img {
+    opacity: 0.65;
+}
+
+.acceso__titulo {
+    padding: 1rem;
+    font-family: var(--fuente-titulos);
+    font-size: 1.3rem;
+    font-weight: 800;
+    font-style: italic;
+    text-align: center;
+    text-transform: uppercase;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8);
+}
+
+
+/* TARJETAS DE AUTOS Y GRILLA */
+
+/* Grilla (1 columna en celular) */
+.grilla-autos {
+    display: grid;
+    gap: 1.25rem;
+}
+
+.card-auto {
+    display: flex;
+    flex-direction: column;
+    padding: 1.25rem;
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio);
+    background-color: var(--color-superficie);
+    transition: border-color 0.2s;
+}
+
+.card-auto:hover {
+    border-color: var(--color-acento);
+}
+
+/* Todas las fotos ocupan el mismo espacio aunque cambie el auto */
+.card-auto__img {
+    width: 100%;
+    aspect-ratio: 677 / 369;
+    object-fit: contain;
+}
+
+/* Fila inferior: nombre + categoria a la izquierda, boton a la derecha */
+.card-auto__pie {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-top: auto;              /* empuja el pie al fondo de la tarjeta */
+    padding-top: 1rem;
+}
+
+/* El bloque de texto puede achicarse */
+.card-auto__pie > div {
+    min-width: 0;
+}
+
+/* El boton nunca se comprime */
+.card-auto__pie .btn {
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+
+.card-auto__nombre {
+    font-family: var(--fuente-titulos);
+    font-size: 1.15rem;
+    font-weight: 800;
+    font-style: italic;
+    text-transform: uppercase;
+}
+
+.card-auto__categoria {
+    font-size: 0.9rem;
+    color: var(--color-texto-suave);
+}
+
+
+/* CARRUSEL */
+
+/* Cabecera: titulo a la izquierda y botones a la derecha */
+.carrusel__cabecera {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* El espacio de abajo lo da la cabecera, no el titulo */
+.carrusel__cabecera .seccion__titulo {
+    margin-bottom: 0;
+}
+
+.carrusel__controles {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* Botones circulares anterior / siguiente (Ayudo Gemini)*/
+.carrusel__boton {
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+    border: 1px solid var(--color-borde);
+    border-radius: 50%;
+    background-color: var(--color-superficie);
+    color: var(--color-texto);
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+}
+
+.carrusel__boton:hover:not(:disabled) {
+    border-color: var(--color-acento);
+    color: var(--color-acento);
+}
+
+/* desactiva el boton cuando no hay mas autos hacia ese lado */
+.carrusel__boton:disabled {
+    opacity: 0.35;
+    cursor: default;
+}
+
+/* Cuerpo carrusel */
+.carrusel__pista {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* medidas tarjetas en celular 1 tarjeta */
+.carrusel__pista .card-auto {
+    flex: 0 0 100%;
+}
+
+
+/* FOOTER */
+.footer {
+    margin-top: var(--espacio-seccion);
+    padding-top: 3rem;
+    border-top: 1px solid var(--color-borde);
+    background-color: var(--color-superficie);
+    scroll-margin-top: var(--alto-header);
+}
+
+/* columna en celular */
+.footer__grilla {
+    display: grid;
+    gap: 2rem;
+}
+
+.footer__titulo {
+    margin-bottom: 0.75rem;
+    font-family: var(--fuente-titulos);
+    font-size: 1rem;
+    font-weight: 800;
+    font-style: italic;
+    text-transform: uppercase;
+    color: var(--color-acento);
+}
+
+.footer__texto {
+    margin-top: 0.75rem;
+    color: var(--color-texto-suave);
+}
+
+.footer__lista {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.footer__enlace {
+    color: var(--color-texto-suave);
+}
+
+.footer__enlace:hover {
+    color: var(--color-acento);
+}
+
+/* Iconos redes sociales */
+.redes {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.redes__enlace {
+    display: grid;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 1px solid var(--color-borde);
+    border-radius: 50%;
+    color: var(--color-texto-suave);
+    transition: border-color 0.2s, color 0.2s;
+}
+
+.redes__enlace:hover {
+    border-color: var(--color-acento);
+    color: var(--color-acento);
+}
+
+/* Imagen del icono de cada red */
+.redes__icono {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+.footer__legal {
+    margin-top: 2.5rem;
+    padding-block: 1.25rem;
+    border-top: 1px solid var(--color-borde);
+    font-size: 0.85rem;
+    color: var(--color-texto-suave);
+}
+
+
+/* MEDIDAS PANTALLA */
+
+/* ----- Cellus/Tablets ----- */
+@media (min-width: 40rem) {
+
+    /* Textos un poco mas grandes */
+    .hero__titulo {
+        font-size: 3.6rem;
+    }
+
+    .hero__subtitulo {
+        font-size: 1.25rem;
+    }
+
+    .seccion__titulo {
+        font-size: 2rem;
+    }
+
+    /* "Quienes somos" mantiene su tamaño chico (si no, lo pisa la regla de arriba) */
+    .seccion__titulo--acento {
+        font-size: 1.1rem;
+    }
+
+    .acceso__titulo {
+        font-size: 1.5rem;
+    }
+
+    /* Accesos y tarjetas en 2 columnas */
+    .accesos,
+    .grilla-autos {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Carrusel: se ven 2 tarjetas a la vez */
+    .carrusel__pista .card-auto {
+        flex: 0 0 48%;
+    }
+
+    /* Footer: la marca ocupa la fila de arriba */
+    .footer__grilla {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ----- Escritorio (PC) ----- */
+@media (min-width: 56.25rem) {
+
+    /* Menu en linea dentro del header: se ve el menu y se oculta la hamburguesa */
+    .nav {
+        display: block;
+        position: static;
+        margin-left: auto;
+        padding: 0;
+        background: none;
+        border: 0;
+    }
+
+    .nav__lista {
+        flex-direction: row;
+        gap: 2rem;
+    }
+
+    .nav__enlace {
+        padding: 0.4rem 0;
+    }
+
+    /* Subrayado naranja bajo el link de la seccion actual (Tengo que ver como hago que se actualice solo)*/
+    .nav__enlace[aria-current="page"] {
+        border-bottom-color: var(--color-acento);
+    }
+
+    /* El boton Contacto ya no necesita empujarse a la derecha */
+    .header__cta {
+        margin-left: 0;
+    }
+
+    .nav-toggle {
+        display: none;
+    }
+
+    /* Tarjetas en 3 columnas */
+    .grilla-autos {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    /* Carrusel: se ven 3 tarjetas a la vez */
+    .carrusel__pista .card-auto {
+        flex: 0 0 31.5%;
+    }
+
+    /* Textos al tamaño maximo */
+    .hero__titulo {
+        font-size: 5.5rem;
+    }
+
+    .hero__subtitulo {
+        font-size: 1.5rem;
+    }
+
+    .seccion__titulo {
+        font-size: 2.25rem;
+    }
+
+    /* "Quienes somos" mantiene su tamaño chico (si no, lo pisa la regla de arriba) */
+    .seccion__titulo--acento {
+        font-size: 1.1rem;
+    }
+
+    .acceso__titulo {
+        font-size: 1.75rem;
+    }
+
+    /* Footer en 3 columnas */
+    .footer__grilla {
+        grid-template-columns: 1.4fr 1fr 1fr;
+    }
+}
